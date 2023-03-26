@@ -168,13 +168,13 @@ type name = 'as-number' | 'as-text';
 
 # Configuration file for compilation
 
-### Watch Mode for One File
+## Watch Mode for One File
 
 ```properties
 tsc <filename> --watch or -w
 ```
 
-### Creating a Project to Manage Multiple Files
+## Creating a Project to Manage Multiple Files
 
 ```properties
 tsc init
@@ -184,7 +184,7 @@ This command generates a `tsconfig.json` file where we can change the project co
 
 > Import file into each other is called "modules".
 
-### Additional Options
+## Additional Options
 
 ```json
 "exclude": ["**/*.dev.ts", "node_modules"],
@@ -202,9 +202,86 @@ This command generates a `tsconfig.json` file where we can change the project co
 - outDir: Where to store the compiled files.
 - downlevelIteration: If the loops don't work as expected
 - noEmitOnError: When set to true does not generate a JS file if the code has an error
-
-### Strict compilation
-
 - strict: Use all strictOptions when set to true
 
 > Add chrome debug extension to VS code.
+
+# Classes and Interfaces
+
+OOP stands for Object-Oriented Programming
+
+> Use real-life entities in your code.
+
+Objects -> The things you work with in code.
+
+Classes -> Blueprints for an object.
+
+Instances -> An object created with a class.
+
+```typescript
+class Department {
+	name: string;
+
+	constructor(n: string) {
+		this.name - n;
+	}
+}
+```
+
+> The `this.` will refer to the thing that called it.
+
+## Add a validation to a method of a class
+
+By doing a validation on a method we avoid using this method with objects that are not `Department`, so they may not have the necessary properties. The parameter `this: Department` helps typescript catch unwanted behaviors.
+
+```typescript
+class Department {
+  ...
+
+  describe(this: Department) {
+    ...
+  }
+}
+```
+
+## Private Properties and Methods
+
+```typescript
+class Department {
+	name: string;
+	private employees: string[] = [];
+
+	constructor(n: string) {
+		this.name - n;
+	}
+}
+```
+
+Accessing this property directly should not be allowed, that why it is private. This code will return and error:
+
+```typescript
+const accounting = new Department('Accounting');
+accounting.employees[2] = 'Anna'; // Trying to modify a private property
+```
+
+## Shortcut for Avoid Double Initialization Code
+
+```typescript
+class Department {
+  constructor(private name: string) {
+    ...
+  }
+}
+```
+
+## Read-Only Property
+
+The `readonly` property blocks this property from being changed.
+
+```typescript
+class Department {
+  constructor(private readonly name: string) {
+    ...
+  }
+}
+```
